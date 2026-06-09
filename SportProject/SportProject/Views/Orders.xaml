@@ -1,0 +1,67 @@
+﻿<Window x:Class="SportProject.Views.Orders"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SportProject.Views"
+        mc:Ignorable="d"
+        Title="Sport" Height="600" Width="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#7FFF00">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
+
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Назад" Name="btnBack" Click="btnBack_Click"/>
+            <TextBlock Grid.Column="1" Text="Список заказов" Style="{StaticResource Title}"/>
+        </Grid>
+
+
+        <ListBox Grid.Row="1" Name="lbOrders" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" MouseDoubleClick="lbOrders_MouseDoubleClick">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="10" BorderBrush="Black" BorderThickness="2"  Background="{Binding Path=StringColor}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="5,0,0,0" >
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Path=Code, StringFormat=Код заказа: {0}}" FontWeight="SemiBold" />
+                                    <TextBlock Text="{Binding Path=OrderStatuses.Name, StringFormat=Статус заказа: {0}}"/>
+                                    <TextBlock Text="{Binding Path=Points.Name, StringFormat=Адрес пункта выдачи: {0}}"/>
+                                    <TextBlock Text="{Binding Path=OrderDate, StringFormat=Дата заказа: {0:dd.MM.yyyy}}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Column="2" BorderThickness="1" BorderBrush="Black" Margin="5,0,0,0">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=DeliveryDate, StringFormat={}{0:dd.MM.yyyy}}"/>
+                            </Border>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Name="gridFooter"  Grid.Row="2" Background="#7FFF00" MinHeight="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+
+            </Grid.ColumnDefinitions>
+
+            <Button Name="btnAdd" Content="Добавить заказ" Click="btnAdd_Click"/>
+        </Grid>
+
+    </Grid>
+</Window>
